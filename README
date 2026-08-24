@@ -1,0 +1,131 @@
+🎾 Tennis Players API
+
+REST API développée avec Node.js, Express et TypeScript permettant de gérer des joueurs de tennis et leurs statistiques.
+
+🚀 Fonctionnalités
+
+- Récupération de tous les joueurs triés par classement
+- Récupération d’un joueur par son identifiant
+- Calcul des statistiques globales :
+  - Pays avec le meilleur ratio de victoires
+  - IMC moyen
+  - Médiane des tailles
+- Ajout d’un nouveau joueur
+- Validation des données avec Zod
+- Gestion centralisée des erreurs
+- Documentation Swagger
+- Tests unitaires et d’intégration
+- Docker
+
+⸻
+
+🛠️ Technologies
+
+- Node.js
+- Express
+- TypeScript
+- Jest
+- Supertest
+- Zod
+- Swagger UI
+- Docker
+
+⸻
+
+📁 Architecture
+
+src/
+├── controllers/
+├── services/
+├── repositories/
+├── models/
+├── routes/
+├── validators/
+├── middlewares/
+├── errors/
+├── config/
+├── data/
+├── app.ts
+└── server.ts
+
+Cette architecture respecte une séparation des responsabilités :
+
+- Controller : gestion des requêtes HTTP
+- Service : logique métier
+- Repository : accès aux données
+- Validator : validation des entrées
+- Middleware : gestion des erreurs
+
+⸻
+
+▶️ Installation
+
+npm install
+
+Lancer l’application :
+
+npm run dev
+
+Compilation :
+
+npm run build
+
+⸻
+
+🧪 Tests
+
+Exécuter les tests :
+
+npm test
+
+⸻
+
+📖 Documentation API
+
+Une fois l’application lancée :
+
+http://localhost:3000/api-docs
+
+⸻
+
+🐳 Docker
+
+Construire l’image :
+
+docker build -t tennis-api .
+
+Lancer le conteneur :
+
+docker run -p 3000:3000 tennis-api
+
+⸻
+
+📌 Endpoints
+
+Méthode Endpoint Description
+GET /api/players Liste des joueurs triés
+GET /api/players/:id Détail d’un joueur
+POST /api/players Création d’un joueur
+GET /api/stats Statistiques globales
+GET /health Vérification de l’état de l’API
+
+⸻
+
+💡 Choix techniques
+
+- Architecture en couches afin de séparer les responsabilités.
+- Validation des requêtes avec Zod.
+- Gestion centralisée des erreurs via un middleware Express.
+- Tests unitaires pour la logique métier.
+- Tests d’intégration avec Supertest pour valider les endpoints HTTP.
+- Documentation OpenAPI avec Swagger.
+- Conteneurisation avec Docker.
+
+⸻
+
+🔮 Améliorations possibles
+
+- Persistance des données avec DynamoDB ou PostgreSQL.
+- Authentification JWT.
+- Pipeline CI/CD complète.
+- Déploiement automatisé sur AWS.

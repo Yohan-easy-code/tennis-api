@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const player_controller_1 = require("../controllers/player.controller");
+const player_repository_1 = require("../repositories/player.repository");
+const player_service_1 = require("../services/player.service");
+const router = (0, express_1.Router)();
+const playerRepository = new player_repository_1.PlayerRepository();
+const playerService = new player_service_1.PlayerService(playerRepository);
+const playerController = new player_controller_1.PlayerController(playerService);
+router.get("/", playerController.getPlayers);
+router.get("/:id", playerController.getPlayerById);
+router.post("/", playerController.createPlayer);
+exports.default = router;
