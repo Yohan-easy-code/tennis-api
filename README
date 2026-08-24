@@ -1,29 +1,58 @@
-🎾 Tennis Players API
+# 🎾 Tennis Players API
+
 ![CI](https://github.com/Yohan-easy-code/tennis-api/actions/workflows/ci.yml/badge.svg)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
 ![Node](https://img.shields.io/badge/Node.js-22-green)
 ![Docker](https://img.shields.io/badge/Docker-Ready-blue)
+![AWS](https://img.shields.io/badge/AWS-Elastic%20Beanstalk-orange)
 
-REST API développée avec Node.js, Express et TypeScript permettant de gérer des joueurs de tennis et leurs statistiques.
+REST API développée avec **Node.js**, **Express** et **TypeScript** permettant de gérer des joueurs de tennis et leurs statistiques.
 
-🚀 Fonctionnalités
+---
+
+# 🚀 Fonctionnalités
 
 - Récupération de tous les joueurs triés par classement
 - Récupération d’un joueur par son identifiant
+- Création d’un nouveau joueur
 - Calcul des statistiques globales :
-  - Pays avec le meilleur ratio de victoires
-  - IMC moyen
-  - Médiane des tailles
-- Ajout d’un nouveau joueur
+- Pays avec le meilleur ratio de victoires
+- IMC moyen
+- Médiane des tailles
 - Validation des données avec Zod
 - Gestion centralisée des erreurs
-- Documentation Swagger
-- Tests unitaires et d’intégration
+- Documentation Swagger (OpenAPI)
+- Tests unitaires
+- Tests d’intégration
 - Docker
+- Déploiement AWS Elastic Beanstalk
+- Pipeline CI/CD GitHub Actions
 
-⸻
+---
 
-🛠️ Technologies
+# 🌍 Application déployée
+
+API :
+
+```
+http://tennis-api-prod.eba-twcx8h3t.us-west-2.elasticbeanstalk.com/
+```
+
+Swagger :
+
+```
+http://tennis-api-prod.eba-twcx8h3t.us-west-2.elasticbeanstalk.com/api-docs
+```
+
+Health Check :
+
+```
+http://tennis-api-prod.eba-twcx8h3t.us-west-2.elasticbeanstalk.com/health
+```
+
+---
+
+# 🛠️ Technologies
 
 - Node.js
 - Express
@@ -33,103 +62,198 @@ REST API développée avec Node.js, Express et TypeScript permettant de gérer d
 - Zod
 - Swagger UI
 - Docker
+- AWS Elastic Beanstalk
+- GitHub Actions
 
-⸻
+---
 
-📁 Architecture
+# 📁 Architecture
 
+```
 src/
-├── controllers/
-├── services/
-├── repositories/
-├── models/
-├── routes/
-├── validators/
-├── middlewares/
-├── errors/
 ├── config/
+├── controllers/
 ├── data/
+├── errors/
+├── middlewares/
+├── models/
+├── repositories/
+├── routes/
+├── services/
+├── validators/
 ├── app.ts
 └── server.ts
+```
 
-Cette architecture respecte une séparation des responsabilités :
+Le projet suit une architecture en couches afin de séparer clairement les responsabilités :
 
-- Controller : gestion des requêtes HTTP
-- Service : logique métier
-- Repository : accès aux données
-- Validator : validation des entrées
-- Middleware : gestion des erreurs
+- **Controllers** → gestion des requêtes HTTP
+- **Services** → logique métier
+- **Repositories** → accès aux données
+- **Validators** → validation des entrées
+- **Middlewares** → gestion centralisée des erreurs
+- **Models** → définition des types
 
-⸻
+---
 
-▶️ Installation
+# 🏗️ Architecture de l'application
 
+```
+          Client
+             │
+             ▼
+        Express Routes
+             │
+             ▼
+        Controllers
+             │
+             ▼
+          Services
+             │
+             ▼
+       Repositories
+             │
+             ▼
+        JSON Dataset
+```
+
+---
+
+# ▶️ Installation
+
+Cloner le projet :
+
+```bash
+git clone https://github.com/Yohan-easy-code/tennis-api.git
+```
+
+Installer les dépendances :
+
+```bash
 npm install
+```
 
-Lancer l’application :
+Lancer le serveur :
 
+```bash
 npm run dev
+```
 
-Compilation :
+Compiler :
 
+```bash
 npm run build
+```
 
-⸻
+Lancer la version compilée :
 
-🧪 Tests
+```bash
+npm start
+```
+
+---
+
+# 🔧 Variables d'environnement
+
+Créer un fichier `.env` :
+
+```env
+PORT=3000
+```
+
+---
+
+# 🧪 Tests
 
 Exécuter les tests :
 
+```bash
 npm test
+```
 
-⸻
+Les tests couvrent :
 
-📖 Documentation API
+- la logique métier (tests unitaires)
+- les endpoints HTTP (tests d'intégration)
 
-Une fois l’application lancée :
+---
 
+# 📖 Documentation API
+
+Une fois l'application démarrée :
+
+```
 http://localhost:3000/api-docs
+```
 
-⸻
+---
 
-🐳 Docker
+# 📌 Endpoints
 
-Construire l’image :
+| Méthode | Endpoint           | Description                     |
+| ------- | ------------------ | ------------------------------- |
+| GET     | `/api/players`     | Liste des joueurs triés         |
+| GET     | `/api/players/:id` | Détail d'un joueur              |
+| POST    | `/api/players`     | Création d'un joueur            |
+| GET     | `/api/stats`       | Statistiques globales           |
+| GET     | `/health`          | Vérification de l'état de l'API |
 
+---
+
+# 🐳 Docker
+
+Construire l'image :
+
+```bash
 docker build -t tennis-api .
+```
 
 Lancer le conteneur :
 
+```bash
 docker run -p 3000:3000 tennis-api
+```
 
-⸻
+---
 
-📌 Endpoints
+# ⚙️ CI/CD
 
-Méthode Endpoint Description
-GET /api/players Liste des joueurs triés
-GET /api/players/:id Détail d’un joueur
-POST /api/players Création d’un joueur
-GET /api/stats Statistiques globales
-GET /health Vérification de l’état de l’API
+Le projet utilise **GitHub Actions**.
 
-⸻
+À chaque **push sur la branche `main`**, la pipeline :
 
-💡 Choix techniques
+1. installe les dépendances ;
+2. exécute les tests ;
+3. compile l'application TypeScript ;
+4. déploie automatiquement l'application sur **AWS Elastic Beanstalk**.
 
-- Architecture en couches afin de séparer les responsabilités.
-- Validation des requêtes avec Zod.
+---
+
+# 💡 Choix techniques
+
+- Architecture en couches afin de faciliter la maintenance.
+- Validation des données avec **Zod**.
 - Gestion centralisée des erreurs via un middleware Express.
-- Tests unitaires pour la logique métier.
-- Tests d’intégration avec Supertest pour valider les endpoints HTTP.
-- Documentation OpenAPI avec Swagger.
-- Conteneurisation avec Docker.
+- Tests unitaires avec **Jest**.
+- Tests d'intégration avec **Supertest**.
+- Documentation OpenAPI avec **Swagger**.
+- Conteneurisation avec **Docker**.
+- Déploiement cloud sur **AWS Elastic Beanstalk**.
+- Intégration continue et déploiement continu avec **GitHub Actions**.
 
-⸻
+---
 
-🔮 Améliorations possibles
+# 🔮 Améliorations possibles
 
-- Persistance des données avec DynamoDB ou PostgreSQL.
+- Persistance des données avec PostgreSQL ou DynamoDB.
 - Authentification JWT.
-- Pipeline CI/CD complète.
-- Déploiement automatisé sur AWS.
+- Pagination des résultats.
+- Cache Redis.
+- Monitoring avec Amazon CloudWatch.
+- Logs centralisés.
+
+---
+
+# 📄 Licence
+
+Projet réalisé dans le cadre d'un test technique.
