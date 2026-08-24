@@ -1,5 +1,8 @@
 🎾 Tennis Players API
 ![CI](https://github.com/Yohan-easy-code/tennis-api/actions/workflows/ci.yml/badge.svg)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
+![Node](https://img.shields.io/badge/Node.js-22-green)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue)
 
 REST API développée avec Node.js, Express et TypeScript permettant de gérer des joueurs de tennis et leurs statistiques.
 
