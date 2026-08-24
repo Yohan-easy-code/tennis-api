@@ -43,5 +43,8 @@ jobs:
       - name: Install Elastic Beanstalk CLI
         run: pip install awsebcli
 
+      - name: Use local source for Elastic Beanstalk
+        run: eb codesource local
+
       - name: Deploy to Elastic Beanstalk
         run: eb deploy
