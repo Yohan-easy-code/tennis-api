@@ -1,4 +1,5 @@
 🎾 Tennis Players API
+![CI](https://github.com/Yohan-easy-code/tennis-api/actions/workflows/ci.yml/badge.svg)
 
 REST API développée avec Node.js, Express et TypeScript permettant de gérer des joueurs de tennis et leurs statistiques.
 
