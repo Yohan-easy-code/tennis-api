@@ -1,4 +1,7 @@
-
+node_modules/
+dist/
+.env
+coverage/
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
