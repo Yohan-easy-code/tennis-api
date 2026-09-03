@@ -1,7 +1,11 @@
 import request from "supertest";
 import app from "../../src/app";
+import { playerRepository } from "../../src/config/dependencies";
 
 describe("Player routes", () => {
+  beforeEach(() => {
+    playerRepository.reset();
+  });
   it("should return all players sorted by rank", async () => {
     const response = await request(app).get("/api/players").expect(200);
 
@@ -87,5 +91,34 @@ describe("Player routes", () => {
       .expect(409);
 
     expect(response.body.error.message).toBe("Player already exists");
+  });
+
+  it("should include a newly created player in stats", async () => {
+    const newPlayer = {
+      id: 1300,
+      firstname: "Test",
+      lastname: "Player",
+      shortname: "T.PLA",
+      sex: "M",
+      country: {
+        picture: "https://example.com/srb.png",
+        code: "SRB",
+      },
+      picture: "https://example.com/player.png",
+      data: {
+        rank: 100,
+        points: 100,
+        weight: 100000,
+        height: 200,
+        age: 30,
+        last: [0, 0, 0, 0, 0],
+      },
+    };
+
+    await request(app).post("/api/players").send(newPlayer).expect(201);
+
+    const response = await request(app).get("/api/stats").expect(200);
+
+    expect(response.body.data.countryWithHighestWinRatio).toBe("SUI");
   });
 });

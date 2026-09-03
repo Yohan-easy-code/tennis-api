@@ -23,4 +23,8 @@ export class PlayerRepository {
   existsById(id: number): boolean {
     return this.players.some((player) => player.id === id);
   }
+  reset(): void {
+    this.players.length = 0;
+    this.players.push(...dataset.players);
+  }
 }
